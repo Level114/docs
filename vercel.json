@@ -1,8 +1,17 @@
 {
-  "build": {
-    "commands": [
-      "pip install -r requirements.txt",
-      "mkdocs build --site-dir public"
-    ]
-  }
+  "builds": [
+    {
+      "src": "mkdocs.yml",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/api/index"
+    }
+  ]
 }
