@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Documentation for Level 114 - First Gaming Subnet on Bittensor",
   "scripts": {
-    "build": "echo 'Building with Python in vercel.json'",
     "dev": "mkdocs serve"
   },
   "keywords": ["level114", "bittensor", "gaming", "subnet", "documentation"],
