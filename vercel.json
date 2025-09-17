@@ -1,17 +1,8 @@
 {
-    "builds": [
-      {
-        "src": "package.json",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "site"
-        }
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/$1"
-      }
+  "build": {
+    "commands": [
+      "pip install -r requirements.txt",
+      "mkdocs build --site-dir public"
     ]
   }
+}
