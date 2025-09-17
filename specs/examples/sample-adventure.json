@@ -1,0 +1,247 @@
+{
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "version": "1.2.0",
+  "name": "The Crystal Caverns",
+  "description": "Explore mysterious underground caverns to find the legendary Crystal of Power while surviving dangerous creatures and environmental hazards.",
+  "world_seed_hash": "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+  "objectives": [
+    {
+      "id": "reach_cavern_entrance",
+      "type": "reach", 
+      "name": "Find the Cavern Entrance",
+      "description": "Locate the hidden entrance to the Crystal Caverns marked by glowing obsidian pillars.",
+      "params": {
+        "target_coordinates": {
+          "x": -245,
+          "y": 64,
+          "z": 1337
+        },
+        "detection_radius": 10,
+        "required_item": "minecraft:iron_pickaxe"
+      },
+      "reward_points": 100,
+      "required": true,
+      "time_limit_sec": 600
+    },
+    {
+      "id": "collect_cave_crystals",
+      "type": "collect",
+      "name": "Gather Cave Crystals",
+      "description": "Mine 12 rare cave crystals found throughout the cavern system.",
+      "params": {
+        "item_id": "minecraft:emerald",
+        "quantity": 12,
+        "custom_item_data": {
+          "display_name": "Cave Crystal",
+          "lore": ["A mysterious crystal that glows with inner light"]
+        },
+        "valid_locations": [
+          {"x": -250, "y": 32, "z": 1340, "radius": 5},
+          {"x": -230, "y": 28, "z": 1355, "radius": 8},
+          {"x": -265, "y": 25, "z": 1320, "radius": 6}
+        ]
+      },
+      "reward_points": 200,
+      "required": true
+    },
+    {
+      "id": "defeat_crystal_guardian",
+      "type": "defeat",
+      "name": "Defeat the Crystal Guardian",
+      "description": "Battle the ancient Crystal Guardian that protects the central chamber.",
+      "params": {
+        "mob_type": "minecraft:iron_golem",
+        "mob_name": "Crystal Guardian",
+        "custom_attributes": {
+          "health": 150,
+          "attack_damage": 12,
+          "speed": 0.15
+        },
+        "spawn_location": {
+          "x": -245,
+          "y": 20, 
+          "z": 1337
+        },
+        "required_participants": 1,
+        "max_participants": 4
+      },
+      "reward_points": 300,
+      "required": true,
+      "time_limit_sec": 900
+    },
+    {
+      "id": "craft_crystal_key",
+      "type": "craft",
+      "name": "Craft the Crystal Key",
+      "description": "Use gathered crystals and rare materials to craft the key to the inner sanctum.",
+      "params": {
+        "recipe": {
+          "result": "minecraft:tripwire_hook",
+          "result_data": {
+            "display_name": "Crystal Key",
+            "lore": ["Unlocks the path to the Crystal of Power"]
+          },
+          "ingredients": [
+            {"item": "minecraft:emerald", "count": 8},
+            {"item": "minecraft:gold_ingot", "count": 2},
+            {"item": "minecraft:redstone", "count": 4}
+          ]
+        },
+        "crafting_location": {
+          "x": -245,
+          "y": 18,
+          "z": 1337,
+          "radius": 3
+        }
+      },
+      "reward_points": 150,
+      "required": true
+    },
+    {
+      "id": "survive_crystal_chamber",
+      "type": "survive", 
+      "name": "Survive the Crystal Chamber",
+      "description": "Withstand the magical energy surges in the final chamber while claiming the Crystal of Power.",
+      "params": {
+        "survival_duration_sec": 120,
+        "location": {
+          "x": -245,
+          "y": 15,
+          "z": 1337,
+          "radius": 15
+        },
+        "hazards": [
+          {
+            "type": "damage",
+            "damage_amount": 2,
+            "interval_sec": 5,
+            "damage_cause": "magic"
+          },
+          {
+            "type": "slowness",
+            "effect_level": 1,
+            "duration_sec": 10,
+            "interval_sec": 15
+          }
+        ],
+        "safe_spots": [
+          {"x": -248, "y": 16, "z": 1340, "radius": 2},
+          {"x": -242, "y": 16, "z": 1334, "radius": 2}
+        ]
+      },
+      "reward_points": 250,
+      "required": true
+    },
+    {
+      "id": "bonus_hidden_treasure",
+      "type": "collect",
+      "name": "Find the Hidden Treasure", 
+      "description": "Discover the secret treasure chamber containing ancient artifacts.",
+      "params": {
+        "item_id": "minecraft:diamond",
+        "quantity": 5,
+        "hidden_location": {
+          "x": -220,
+          "y": 22,
+          "z": 1360,
+          "requires_secret_mechanism": true
+        },
+        "hints": [
+          "Look for the pattern of crystals that doesn't match the others",
+          "The guardian's gaze reveals the path",
+          "Where shadows dance with light"
+        ]
+      },
+      "reward_points": 100,
+      "required": false
+    }
+  ],
+  "difficulty": "hard",
+  "time_limit_sec": 2700,
+  "content_hash": "f1e2d3c4b5a6978849302817465392048576119203845672938475621094857639",
+  "prerequisites": {
+    "min_level": 15,
+    "items_required": [
+      "minecraft:iron_pickaxe",
+      "minecraft:food",
+      "minecraft:torch"
+    ],
+    "completed_adventures": [
+      "beginner-mining-tutorial",
+      "basic-combat-training"
+    ]
+  },
+  "rewards": {
+    "experience": 1500,
+    "items": [
+      {
+        "item_id": "minecraft:emerald_block",
+        "quantity": 1,
+        "enchantments": {}
+      },
+      {
+        "item_id": "minecraft:diamond_sword",
+        "quantity": 1,
+        "enchantments": {
+          "minecraft:sharpness": 3,
+          "minecraft:unbreaking": 2
+        }
+      },
+      {
+        "item_id": "minecraft:potion",
+        "quantity": 3,
+        "custom_data": {
+          "potion_type": "minecraft:strength",
+          "display_name": "Crystal-Infused Strength Potion"
+        }
+      }
+    ],
+    "currency": 500
+  },
+  "metadata": {
+    "creator": "adventure_team_alpha",
+    "created_at": "2024-03-15T10:30:00Z",
+    "updated_at": "2024-03-18T14:45:00Z", 
+    "tags": ["underground", "combat", "puzzle", "crystals", "intermediate"],
+    "estimated_duration_minutes": 45,
+    "max_players": 4
+  },
+  "validation": {
+    "replay_seed": "a1b2c3d4e5f67890abcdef1234567890",
+    "checkpoints": [
+      {
+        "checkpoint_id": "entrance_reached",
+        "validation_hash": "1a2b3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890",
+        "timestamp": 600
+      },
+      {
+        "checkpoint_id": "crystals_collected", 
+        "validation_hash": "2b3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890ab",
+        "timestamp": 1200
+      },
+      {
+        "checkpoint_id": "guardian_defeated",
+        "validation_hash": "3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890abcd",
+        "timestamp": 1800
+      },
+      {
+        "checkpoint_id": "key_crafted",
+        "validation_hash": "4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+        "timestamp": 2100
+      },
+      {
+        "checkpoint_id": "chamber_survived",
+        "validation_hash": "5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef12",
+        "timestamp": 2500
+      }
+    ],
+    "anti_cheat_measures": [
+      "deterministic_world_generation",
+      "server_side_validation",
+      "encrypted_objective_verification",
+      "replay_determinism_check",
+      "behavioral_analysis",
+      "timing_validation"
+    ]
+  }
+}

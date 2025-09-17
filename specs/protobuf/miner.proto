@@ -1,0 +1,374 @@
+syntax = "proto3";
+
+package mcsubnet;
+
+option go_package = "github.com/your-org/minecraft-subnet/pkg/proto";
+option java_package = "ai.bittensor.mcsubnet";
+option java_outer_classname = "MinerServiceProto";
+
+// Import common types
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// ============================================================================
+// Core Service Definition
+// ============================================================================
+
+service MinerService {
+  // Regular heartbeat to report miner status and performance metrics
+  rpc Heartbeat(HeartbeatRequest) returns (Ack);
+  
+  // Submit proof bundle containing gameplay evidence and metrics
+  rpc SubmitProofBundle(ProofBundleRequest) returns (Ack);
+  
+  // Retrieve assigned adventure task for server execution
+  rpc GetAdventure(AdventureRequest) returns (AdventureTask);
+  
+  // Stream real-time metrics for live monitoring
+  rpc StreamMetrics(MetricsStreamRequest) returns (stream MetricsUpdate);
+  
+  // Handle validator probe requests
+  rpc HandleProbe(ProbeRequest) returns (ProbeResponse);
+  
+  // Provide replay data for validation
+  rpc GetReplayData(ReplayRequest) returns (ReplayResponse);
+  
+  // Health check endpoint
+  rpc HealthCheck(google.protobuf.Empty) returns (HealthStatus);
+}
+
+// ============================================================================
+// Message Definitions
+// ============================================================================
+
+// Heartbeat Request - Regular status update from miner
+message HeartbeatRequest {
+  // Miner identification
+  string miner_hotkey = 1;
+  
+  // Server information
+  ServerInfo server_info = 2;
+  
+  // Performance metrics
+  PerformanceMetrics performance = 3;
+  
+  // Player metrics
+  PlayerMetrics player_metrics = 4;
+  
+  // Adventure status
+  AdventureStatus adventure_status = 5;
+  
+  // Network metrics
+  NetworkMetrics network_metrics = 6;
+  
+  // Plugin status
+  PluginStatus plugin_status = 7;
+  
+  // Timestamp and signature
+  google.protobuf.Timestamp timestamp = 8;
+  string signature = 9;
+  string nonce = 10;
+}
+
+// Server Information
+message ServerInfo {
+  string name = 1;
+  string version = 2;               // e.g., "Paper-1.20.1-196"
+  string plugin_version = 3;        // Subnet plugin version
+  string motd = 4;                  // Message of the day
+  int32 max_players = 5;
+  string game_mode = 6;             // survival, creative, adventure, spectator
+  string difficulty = 7;            // peaceful, easy, normal, hard
+  int64 uptime_seconds = 8;
+  google.protobuf.Timestamp last_restart = 9;
+  string restart_reason = 10;       // scheduled, crash, update, manual, unknown
+}
+
+// Performance Metrics
+message PerformanceMetrics {
+  // TPS (Ticks Per Second) metrics
+  double tps_avg = 1;
+  double tps_min = 2;
+  double tps_max = 3;
+  
+  // Memory and resource usage
+  int64 memory_used_mb = 4;
+  int64 memory_max_mb = 5;
+  double cpu_usage_percent = 6;
+  
+  // Latency metrics
+  double latency_ms_avg = 7;
+  double latency_ms_p95 = 8;
+  double latency_ms_p99 = 9;
+  
+  // Garbage collection metrics
+  int32 gc_collections = 10;
+  int64 gc_time_ms = 11;
+  
+  // Load metrics
+  double load_avg_1m = 12;
+  double load_avg_5m = 13;
+}
+
+// Player Metrics
+message PlayerMetrics {
+  int32 players_online = 1;
+  int32 players_max_concurrent = 2;
+  int32 unique_players_24h = 3;
+  double avg_session_duration_minutes = 4;
+  int32 new_player_joins = 5;
+  int32 player_disconnects = 6;
+  double engagement_score = 7;        // Calculated engagement metric
+  repeated PlayerSession recent_sessions = 8;
+}
+
+// Individual Player Session Data
+message PlayerSession {
+  string session_id = 1;
+  string player_uuid = 2;            // Anonymized UUID
+  google.protobuf.Timestamp joined_at = 3;
+  google.protobuf.Timestamp left_at = 4;
+  double duration_minutes = 5;
+  double engagement_minutes = 6;
+  int32 objectives_completed = 7;
+  double bot_likelihood = 8;          // 0.0-1.0 bot detection score
+  repeated string behavior_flags = 9;
+}
+
+// Adventure Status
+message AdventureStatus {
+  int32 active_adventures = 1;
+  int32 completed_adventures_1h = 2;
+  int32 failed_adventures_1h = 3;
+  double completion_rate = 4;
+  repeated string adventure_types_active = 5;
+  double quality_score = 6;           // Adventure quality assessment
+}
+
+// Network Metrics
+message NetworkMetrics {
+  string external_ip = 1;
+  int32 port = 2;
+  double bandwidth_in_mbps = 3;
+  double bandwidth_out_mbps = 4;
+  int32 connection_attempts_1h = 5;
+  int32 failed_connections_1h = 6;
+  double packet_loss_rate = 7;
+}
+
+// Plugin Status
+message PluginStatus {
+  bool enabled = 1;
+  google.protobuf.Timestamp last_update = 2;
+  int32 error_count_1h = 3;
+  int32 warnings_count_1h = 4;
+  repeated string features_enabled = 5;
+  string config_hash = 6;            // Hash of current configuration
+}
+
+// Proof Bundle Request - Evidence submission for validation
+message ProofBundleRequest {
+  string miner_hotkey = 1;
+  
+  // Adventure identification
+  string adventure_id = 2;
+  string adventure_version = 3;
+  
+  // World and seed information
+  string world_seed_hash = 4;
+  string world_state_hash = 5;
+  
+  // Event logs and proofs
+  repeated EventLog event_logs = 6;
+  string event_log_hash = 7;
+  
+  // Objective completion proofs
+  repeated ObjectiveCompletion objective_completions = 8;
+  
+  // Player metrics for this adventure
+  repeated PlayerMetrics player_metrics = 9;
+  
+  // Replay information
+  ReplayInfo replay_info = 10;
+  
+  // Server performance during adventure
+  PerformanceSnapshot performance_snapshot = 11;
+  
+  // Signature and validation
+  google.protobuf.Timestamp timestamp = 12;
+  string signature = 13;
+  string nonce = 14;
+}
+
+// Event Log Entry
+message EventLog {
+  string event_id = 1;
+  string event_type = 2;              // player_join, block_break, mob_kill, etc.
+  google.protobuf.Timestamp timestamp = 3;
+  string player_uuid = 4;             // Anonymized
+  map<string, string> event_data = 5; // Flexible key-value event data
+  string event_hash = 6;              // Hash for integrity verification
+}
+
+// Objective Completion Proof
+message ObjectiveCompletion {
+  string objective_id = 1;
+  string player_uuid = 2;             // Anonymized
+  google.protobuf.Timestamp completed_at = 3;
+  string completion_proof = 4;        // Cryptographic proof of completion
+  map<string, string> completion_data = 5; // Objective-specific data
+  bool verified = 6;                  // Self-verification status
+}
+
+// Replay Information for Validation
+message ReplayInfo {
+  string replay_seed = 1;             // Deterministic replay seed
+  repeated string checkpoint_hashes = 2; // State hashes at key points
+  string full_replay_hash = 3;        // Hash of complete replay data
+  int64 replay_data_size_bytes = 4;   // Size of replay data
+  bool replay_available = 5;          // Whether full replay is available
+}
+
+// Performance Snapshot during Adventure
+message PerformanceSnapshot {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+  PerformanceMetrics avg_performance = 3;
+  PerformanceMetrics min_performance = 4;
+  PerformanceMetrics max_performance = 5;
+  repeated string performance_issues = 6; // Any performance problems detected
+}
+
+// Adventure Request - Get assigned adventure
+message AdventureRequest {
+  string miner_hotkey = 1;
+  repeated string supported_types = 2;     // Adventure types miner can handle
+  string difficulty_preference = 3;       // easy, normal, hard, extreme
+  int32 max_players = 4;                  // Maximum players miner can handle
+  google.protobuf.Timestamp timestamp = 5;
+  string signature = 6;
+}
+
+// Adventure Task Definition
+message AdventureTask {
+  string id = 1;
+  string version = 2;
+  string name = 3;
+  string description = 4;
+  
+  // World generation
+  string world_seed_hash = 5;
+  string world_config = 6;            // JSON configuration for world generation
+  
+  // Objectives
+  repeated Objective objectives = 7;
+  
+  // Adventure properties
+  string difficulty = 8;              // easy, normal, hard, extreme
+  int32 time_limit_sec = 9;
+  int32 max_players = 10;
+  
+  // Content and validation
+  string content_hash = 11;
+  repeated string required_plugins = 12;
+  
+  // Metadata
+  google.protobuf.Timestamp created_at = 13;
+  map<string, string> metadata = 14;
+}
+
+// Adventure Objective
+message Objective {
+  string id = 1;
+  string type = 2;                    // collect, defeat, reach, craft, survive, etc.
+  string name = 3;
+  string description = 4;
+  map<string, string> params = 5;     // Objective-specific parameters
+  int32 reward_points = 6;
+  bool required = 7;                  // Whether objective is required for completion
+  int32 time_limit_sec = 8;           // Optional time limit for this objective
+}
+
+// Metrics Stream Request
+message MetricsStreamRequest {
+  string miner_hotkey = 1;
+  repeated string metric_types = 2;    // Types of metrics to stream
+  int32 interval_seconds = 3;          // Update interval
+}
+
+// Metrics Update - Streamed metric update
+message MetricsUpdate {
+  string metric_type = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  map<string, double> values = 3;     // Metric name -> value
+  string miner_hotkey = 4;
+}
+
+// Probe Request from Validator
+message ProbeRequest {
+  string validator_hotkey = 1;
+  string probe_id = 2;
+  string probe_type = 3;              // connection, performance, adventure, replay
+  map<string, string> probe_params = 4;
+  google.protobuf.Timestamp timestamp = 5;
+  string signature = 6;
+}
+
+// Probe Response to Validator
+message ProbeResponse {
+  string probe_id = 1;
+  bool success = 2;
+  string response_data = 3;           // JSON response data
+  double response_time_ms = 4;
+  string error_message = 5;
+  google.protobuf.Timestamp timestamp = 6;
+}
+
+// Replay Request from Validator
+message ReplayRequest {
+  string validator_hotkey = 1;
+  string adventure_id = 2;
+  string replay_seed = 3;
+  google.protobuf.Timestamp start_time = 4;
+  google.protobuf.Timestamp end_time = 5;
+  repeated string checkpoint_ids = 6;  // Specific checkpoints to verify
+  string signature = 7;
+}
+
+// Replay Response with Validation Data
+message ReplayResponse {
+  string adventure_id = 1;
+  bool replay_available = 2;
+  bytes replay_data = 3;              // Compressed replay data
+  repeated CheckpointData checkpoints = 4;
+  string replay_hash = 5;
+  int64 data_size_bytes = 6;
+  string error_message = 7;
+}
+
+// Checkpoint Data for Replay Validation
+message CheckpointData {
+  string checkpoint_id = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  string state_hash = 3;              // Hash of world/player state
+  bytes state_data = 4;               // Compressed state snapshot
+  map<string, string> metadata = 5;   // Additional checkpoint metadata
+}
+
+// Health Status Response
+message HealthStatus {
+  bool healthy = 1;
+  string status = 2;                  // OK, DEGRADED, CRITICAL
+  repeated string issues = 3;         // Any health issues detected
+  google.protobuf.Timestamp timestamp = 4;
+  map<string, string> details = 5;    // Additional health information
+}
+
+// Generic Acknowledgment Response
+message Ack {
+  bool ok = 1;
+  string message = 2;
+  int32 error_code = 3;               // Error code if ok = false
+  google.protobuf.Timestamp timestamp = 4;
+  map<string, string> metadata = 5;   // Additional response metadata
+}

@@ -1,0 +1,239 @@
+{
+  "miner_hotkey": "5C4hrfjw9DjXZTzV3MwzrrAr9P1MJhSrvWGWqi1eSuyUpnhM",
+  "server_version": "Paper-1.20.1-196",
+  "plugin_version": "2.1.0",
+  "timestamp": 1710944400,
+  "server_info": {
+    "name": "CrystalCave Gaming",
+    "motd": "Adventure awaits in the Crystal Caverns! | Bittensor Subnet",
+    "max_players": 50,
+    "game_mode": "survival", 
+    "difficulty": "normal"
+  },
+  "performance_metrics": {
+    "tps_avg": 19.7,
+    "tps_min": 18.1,
+    "tps_max": 20.0,
+    "latency_ms": 26.3,
+    "memory_used_mb": 4356,
+    "memory_max_mb": 6144,
+    "cpu_usage_percent": 47.2,
+    "gc_collections": 3,
+    "gc_time_ms": 67
+  },
+  "player_metrics": {
+    "players_online": 12,
+    "players_max_concurrent": 18,
+    "unique_players_24h": 45,
+    "avg_session_duration_minutes": 42.7,
+    "new_player_joins": 3,
+    "player_disconnects": 2,
+    "engagement_breakdown": {
+      "highly_engaged": 8,
+      "moderately_engaged": 3, 
+      "low_engagement": 1
+    },
+    "recent_sessions": [
+      {
+        "session_id": "sess_001_20240320_1400",
+        "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+        "duration_minutes": 67.3,
+        "engagement_score": 0.91,
+        "objectives_completed": 4,
+        "bot_likelihood": 0.08,
+        "connection_quality": {
+          "avg_ping_ms": 45,
+          "packet_loss": 0.002,
+          "disconnections": 0
+        }
+      },
+      {
+        "session_id": "sess_002_20240320_1430",
+        "player_uuid": "660f9511-f3ac-52e5-b827-557766551111", 
+        "duration_minutes": 23.8,
+        "engagement_score": 0.73,
+        "objectives_completed": 2,
+        "bot_likelihood": 0.15,
+        "connection_quality": {
+          "avg_ping_ms": 78,
+          "packet_loss": 0.001,
+          "disconnections": 1
+        }
+      },
+      {
+        "session_id": "sess_003_20240320_1445",
+        "player_uuid": "770a0622-04bd-63f6-c938-668877662222",
+        "duration_minutes": 89.2,
+        "engagement_score": 0.94,
+        "objectives_completed": 7,
+        "bot_likelihood": 0.03,
+        "connection_quality": {
+          "avg_ping_ms": 32,
+          "packet_loss": 0.000,
+          "disconnections": 0
+        }
+      }
+    ]
+  },
+  "uptime_metrics": {
+    "uptime_sec": 2678400,
+    "last_restart": 1710684000,
+    "restart_reason": "scheduled",
+    "crashes_24h": 0,
+    "availability_percentage_24h": 99.7,
+    "planned_downtime_minutes_24h": 4
+  },
+  "adventure_metrics": {
+    "active_adventures": 7,
+    "completed_adventures_1h": 23,
+    "failed_adventures_1h": 3,
+    "average_completion_rate": 0.87,
+    "adventure_types_active": [
+      "crystal_caverns_hard",
+      "crystal_caverns_normal", 
+      "beginner_tutorial",
+      "combat_training_intermediate"
+    ],
+    "difficulty_distribution": {
+      "easy": 2,
+      "normal": 3, 
+      "hard": 2,
+      "extreme": 0
+    },
+    "quality_metrics": {
+      "player_satisfaction_score": 0.89,
+      "objective_balance_score": 0.92,
+      "content_variety_score": 0.85,
+      "replay_determinism_score": 0.98
+    }
+  },
+  "network_metrics": {
+    "external_ip": "203.0.113.42",
+    "port": 25565,
+    "bandwidth_in_mbps": 8.3,
+    "bandwidth_out_mbps": 12.7,
+    "connection_attempts_1h": 47,
+    "failed_connections_1h": 2,
+    "connection_success_rate": 0.957,
+    "geographic_distribution": {
+      "north_america": 8,
+      "europe": 3,
+      "asia_pacific": 1,
+      "other": 0
+    }
+  },
+  "plugin_status": {
+    "enabled": true,
+    "last_update": 1710940800,
+    "error_count_1h": 0,
+    "warnings_count_1h": 1,
+    "features_enabled": [
+      "adventure_management",
+      "metrics_collection", 
+      "anti_cheat_detection",
+      "replay_recording",
+      "performance_monitoring"
+    ],
+    "configuration_hash": "cfg_hash_abc123def456789",
+    "health_status": "healthy"
+  },
+  "quality_assessment": {
+    "self_reported_scores": {
+      "uptime_score": 0.997,
+      "tps_score": 0.985,
+      "player_engagement_score": 0.891,
+      "adventure_quality_score": 0.887,
+      "anti_bot_score": 0.923
+    },
+    "performance_trends": {
+      "tps_trend_7d": "stable",
+      "engagement_trend_7d": "improving", 
+      "uptime_trend_7d": "excellent",
+      "player_count_trend_7d": "growing"
+    },
+    "recent_improvements": [
+      "upgraded_server_hardware_20240318",
+      "optimized_chunk_loading_20240317",
+      "enhanced_anti_cheat_20240315"
+    ],
+    "known_issues": [],
+    "planned_maintenance": [
+      {
+        "type": "plugin_update",
+        "scheduled_for": 1711030800,
+        "estimated_duration_minutes": 10,
+        "impact": "minimal"
+      }
+    ]
+  },
+  "validator_interaction": {
+    "last_probe_received": 1710943800,
+    "probe_response_time_avg_ms": 234,
+    "probe_success_rate": 0.99,
+    "validator_feedback_score": 0.91,
+    "recent_probes": [
+      {
+        "probe_id": "probe_20240320_1530_001",
+        "validator_hotkey": "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY", 
+        "probe_type": "performance",
+        "timestamp": 1710943800,
+        "response_time_ms": 189,
+        "result": "passed",
+        "score_impact": 0.02
+      },
+      {
+        "probe_id": "probe_20240320_1515_002",
+        "validator_hotkey": "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty",
+        "probe_type": "adventure_quality",
+        "timestamp": 1710942900,
+        "response_time_ms": 445,
+        "result": "passed",
+        "score_impact": 0.01
+      }
+    ]
+  },
+  "security_metrics": {
+    "failed_login_attempts_24h": 7,
+    "suspicious_activity_flags": 0,
+    "ip_reputation_score": 0.98,
+    "ddos_mitigation_triggers": 0,
+    "rate_limit_violations_24h": 2,
+    "security_scan_results": {
+      "last_scan": 1710940800,
+      "vulnerabilities_found": 0,
+      "security_score": 0.97
+    }
+  },
+  "economic_metrics": {
+    "estimated_daily_rewards_tao": 2.47,
+    "quality_score_trend_7d": 0.89,
+    "validator_consensus_score": 0.91,
+    "network_rank_estimate": 23,
+    "roi_metrics": {
+      "daily_operating_cost_usd": 12.50,
+      "estimated_daily_revenue_usd": 45.30,
+      "break_even_achieved": true,
+      "profitability_score": 0.72
+    }
+  },
+  "environmental_impact": {
+    "power_consumption_estimate_kwh_24h": 18.4,
+    "carbon_footprint_estimate_kg_co2_24h": 8.7,
+    "efficiency_score": 0.83,
+    "renewable_energy_percentage": 65
+  },
+  "metadata": {
+    "heartbeat_sequence": 45678,
+    "data_collection_version": "3.2.1",
+    "compression_applied": true,
+    "anonymization_level": "high",
+    "retention_policy": "30_days_detailed_7_days_summary",
+    "compliance_flags": [
+      "gdpr_compliant",
+      "privacy_by_design",
+      "data_minimization"
+    ]
+  },
+  "signature": "heartbeat_signature_abc123def456789012345678901234567890abcdef1234567890abcdef123456789012345678901234567890abcdef",
+  "nonce": "heartbeat_nonce_abcd1234efgh5678"
+}

@@ -1,0 +1,317 @@
+{
+  "miner_hotkey": "5C4hrfjw9DjXZTzV3MwzrrAr9P1MJhSrvWGWqi1eSuyUpnhM",
+  "adventure_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "adventure_version": "1.2.0",
+  "world_seed_hash": "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+  "world_state_hash": "e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
+  "event_logs": [
+    {
+      "event_id": "evt_001",
+      "event_type": "player_join",
+      "timestamp": "2024-03-20T15:30:15.234Z",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "event_data": {
+        "player_name": "AnonymizedPlayer1",
+        "join_location_x": "-200",
+        "join_location_y": "64",
+        "join_location_z": "1300",
+        "game_mode": "survival",
+        "client_version": "1.20.1"
+      },
+      "event_hash": "1a2b3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890"
+    },
+    {
+      "event_id": "evt_042", 
+      "event_type": "objective_start",
+      "timestamp": "2024-03-20T15:32:30.567Z",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "event_data": {
+        "objective_id": "reach_cavern_entrance",
+        "objective_type": "reach",
+        "start_location_x": "-200",
+        "start_location_y": "64", 
+        "start_location_z": "1300",
+        "target_location_x": "-245",
+        "target_location_y": "64",
+        "target_location_z": "1337"
+      },
+      "event_hash": "2b3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890ab"
+    },
+    {
+      "event_id": "evt_087",
+      "event_type": "block_break",
+      "timestamp": "2024-03-20T15:45:12.890Z",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "event_data": {
+        "block_type": "minecraft:emerald_ore",
+        "location_x": "-250",
+        "location_y": "32",
+        "location_z": "1340",
+        "tool_used": "minecraft:iron_pickaxe",
+        "drop_items": ["minecraft:emerald"],
+        "related_objective": "collect_cave_crystals"
+      },
+      "event_hash": "3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890abcd"
+    },
+    {
+      "event_id": "evt_156",
+      "event_type": "mob_defeat",
+      "timestamp": "2024-03-20T16:02:45.123Z",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "event_data": {
+        "mob_type": "minecraft:iron_golem",
+        "mob_name": "Crystal Guardian",
+        "mob_location_x": "-245",
+        "mob_location_y": "20",
+        "mob_location_z": "1337",
+        "damage_dealt": "150",
+        "time_to_defeat_sec": "45",
+        "weapons_used": ["minecraft:diamond_sword"],
+        "related_objective": "defeat_crystal_guardian"
+      },
+      "event_hash": "4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+    },
+    {
+      "event_id": "evt_203",
+      "event_type": "item_craft",
+      "timestamp": "2024-03-20T16:08:30.456Z",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "event_data": {
+        "recipe_result": "minecraft:tripwire_hook",
+        "result_name": "Crystal Key",
+        "ingredients_used": [
+          {"item": "minecraft:emerald", "count": 8},
+          {"item": "minecraft:gold_ingot", "count": 2},
+          {"item": "minecraft:redstone", "count": 4}
+        ],
+        "crafting_location_x": "-245",
+        "crafting_location_y": "18",
+        "crafting_location_z": "1337",
+        "related_objective": "craft_crystal_key"
+      },
+      "event_hash": "5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef12"
+    },
+    {
+      "event_id": "evt_234",
+      "event_type": "objective_complete",
+      "timestamp": "2024-03-20T16:15:18.789Z",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "event_data": {
+        "objective_id": "survive_crystal_chamber",
+        "objective_type": "survive",
+        "completion_time_sec": "120",
+        "location_x": "-245",
+        "location_y": "15",
+        "location_z": "1337",
+        "health_remaining": "6.5",
+        "effects_endured": ["magic_damage", "slowness"],
+        "reward_points": "250"
+      },
+      "event_hash": "6f7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234"
+    },
+    {
+      "event_id": "evt_267",
+      "event_type": "adventure_complete",
+      "timestamp": "2024-03-20T16:15:45.012Z",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "event_data": {
+        "adventure_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "completion_time_sec": "2730",
+        "objectives_completed": "5",
+        "objectives_total": "6", 
+        "bonus_objectives_completed": "0",
+        "total_reward_points": "1000",
+        "completion_rate": "0.83",
+        "final_score": "850"
+      },
+      "event_hash": "7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456"
+    }
+  ],
+  "event_log_hash": "abc123def456789012345678901234567890abcdef1234567890abcdef123456",
+  "objective_completions": [
+    {
+      "objective_id": "reach_cavern_entrance",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "completed_at": "2024-03-20T15:42:15.234Z",
+      "completion_proof": "proof_hash_reach_entrance_abc123def456",
+      "completion_data": {
+        "final_location_x": "-243",
+        "final_location_y": "64",
+        "final_location_z": "1339",
+        "distance_from_target": "4.2",
+        "completion_method": "walking",
+        "time_taken_sec": "705"
+      },
+      "verified": true
+    },
+    {
+      "objective_id": "collect_cave_crystals", 
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "completed_at": "2024-03-20T15:58:42.567Z",
+      "completion_proof": "proof_hash_collect_crystals_def789abc123",
+      "completion_data": {
+        "items_collected": "12",
+        "collection_locations": [
+          {"x": "-250", "y": "32", "z": "1340", "count": "4"},
+          {"x": "-230", "y": "28", "z": "1355", "count": "5"},
+          {"x": "-265", "y": "25", "z": "1320", "count": "3"}
+        ],
+        "collection_time_sec": "987",
+        "tools_used": ["minecraft:iron_pickaxe"]
+      },
+      "verified": true
+    },
+    {
+      "objective_id": "defeat_crystal_guardian",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "completed_at": "2024-03-20T16:02:45.123Z",
+      "completion_proof": "proof_hash_defeat_guardian_ghi456jkl789",
+      "completion_data": {
+        "mob_health_initial": "150",
+        "mob_health_final": "0",
+        "combat_duration_sec": "45",
+        "damage_sources": [
+          {"weapon": "minecraft:diamond_sword", "damage": "135"},
+          {"weapon": "minecraft:bow", "damage": "15"}
+        ],
+        "player_health_remaining": "12.5",
+        "combat_location": {"x": "-245", "y": "20", "z": "1337"}
+      },
+      "verified": true
+    },
+    {
+      "objective_id": "craft_crystal_key",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000", 
+      "completed_at": "2024-03-20T16:08:30.456Z",
+      "completion_proof": "proof_hash_craft_key_mno123pqr456",
+      "completion_data": {
+        "recipe_validated": true,
+        "ingredients_consumed": [
+          {"item": "minecraft:emerald", "count": 8},
+          {"item": "minecraft:gold_ingot", "count": 2},
+          {"item": "minecraft:redstone", "count": 4}
+        ],
+        "crafting_table_location": {"x": "-245", "y": "18", "z": "1337"},
+        "result_item": "minecraft:tripwire_hook",
+        "result_metadata": {"display_name": "Crystal Key"}
+      },
+      "verified": true
+    },
+    {
+      "objective_id": "survive_crystal_chamber",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "completed_at": "2024-03-20T16:15:18.789Z",
+      "completion_proof": "proof_hash_survive_chamber_stu789vwx012",
+      "completion_data": {
+        "survival_duration_sec": "120",
+        "required_duration_sec": "120",
+        "location_maintained": {"x": "-245", "y": "15", "z": "1337", "radius": "15"},
+        "damage_taken": [
+          {"source": "magic", "amount": "48", "instances": "24"},
+          {"source": "environmental", "amount": "12", "instances": "6"}
+        ],
+        "effects_endured": [
+          {"effect": "slowness", "level": "1", "duration_total_sec": "80"}
+        ],
+        "health_start": "20.0",
+        "health_end": "6.5",
+        "used_safe_spots": "3"
+      },
+      "verified": true
+    }
+  ],
+  "player_metrics": [
+    {
+      "session_id": "sess_550e8400_20240320_1530",
+      "player_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "joined_at": "2024-03-20T15:30:15.234Z",
+      "left_at": "2024-03-20T16:18:30.456Z",
+      "session_duration_minutes": 48.25,
+      "active_play_minutes": 46.8,
+      "afk_duration_minutes": 1.45,
+      "engagement_minutes": 45.2,
+      "activity_score": 0.89,
+      "objectives_completed": 5,
+      "adventure_completion_rate": 0.83,
+      "bot_likelihood": 0.12,
+      "behavior_flags": [],
+      "human_indicators": [
+        "natural_movement_variance",
+        "realistic_reaction_times", 
+        "creative_problem_solving",
+        "learning_curve"
+      ]
+    }
+  ],
+  "replay_info": {
+    "replay_seed": "a1b2c3d4e5f67890abcdef1234567890",
+    "checkpoint_hashes": [
+      "1a2b3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890",
+      "2b3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890ab", 
+      "3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890abcd",
+      "4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+      "5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef12"
+    ],
+    "full_replay_hash": "complete_replay_hash_yz345abc678def901234567890abcdef1234567890",
+    "replay_data_size_bytes": 2457600,
+    "replay_available": true
+  },
+  "performance_snapshot": {
+    "start_time": "2024-03-20T15:30:15.234Z",
+    "end_time": "2024-03-20T16:18:30.456Z",
+    "avg_performance": {
+      "tps_avg": 19.8,
+      "tps_min": 18.2,
+      "tps_max": 20.0,
+      "memory_used_mb": 4200,
+      "memory_max_mb": 6144,
+      "cpu_usage_percent": 45.3,
+      "latency_ms_avg": 28.5,
+      "gc_collections": 12,
+      "gc_time_ms": 234
+    },
+    "min_performance": {
+      "tps_avg": 18.2,
+      "tps_min": 16.8,
+      "tps_max": 19.1, 
+      "memory_used_mb": 3800,
+      "memory_max_mb": 6144,
+      "cpu_usage_percent": 38.7,
+      "latency_ms_avg": 31.2,
+      "gc_collections": 2,
+      "gc_time_ms": 45
+    },
+    "max_performance": {
+      "tps_avg": 20.0,
+      "tps_min": 19.5,
+      "tps_max": 20.0,
+      "memory_used_mb": 4800,
+      "memory_max_mb": 6144,
+      "cpu_usage_percent": 52.1,
+      "latency_ms_avg": 24.8,
+      "gc_collections": 3,
+      "gc_time_ms": 78
+    },
+    "performance_issues": []
+  },
+  "validation_metadata": {
+    "proof_bundle_version": "2.1.0",
+    "compression_algorithm": "gzip",
+    "encryption_applied": false,
+    "data_integrity_checks": [
+      "event_log_hash_verification",
+      "objective_completion_proofs",
+      "replay_determinism_check",
+      "performance_metrics_validation"
+    ],
+    "quality_scores": {
+      "data_completeness": 0.98,
+      "temporal_consistency": 0.96,
+      "logical_coherence": 0.99,
+      "replay_determinism": 0.97
+    }
+  },
+  "timestamp": "2024-03-20T16:19:00.000Z",
+  "signature": "signature_hash_bundle_verification_abc123def456789012345678901234567890abcdef1234567890abcdef123456789012345678901234567890abcdef",
+  "nonce": "nonce_1234567890abcdef"
+}

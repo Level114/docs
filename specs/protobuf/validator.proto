@@ -1,0 +1,455 @@
+syntax = "proto3";
+
+package mcsubnet;
+
+option go_package = "github.com/your-org/minecraft-subnet/pkg/proto";
+option java_package = "ai.bittensor.mcsubnet";
+option java_outer_classname = "ValidatorServiceProto";
+
+// Import common types
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// ============================================================================
+// Core Service Definition
+// ============================================================================
+
+service ValidatorService {
+  // Submit quality scores for miners after evaluation
+  rpc SubmitScore(ScoreSubmissionRequest) returns (Ack);
+  
+  // Initiate probe of a specific miner
+  rpc ProbeServer(ProbeServerRequest) returns (ProbeResult);
+  
+  // Request replay data for verification
+  rpc RequestReplay(ReplayRequest) returns (ReplayData);
+  
+  // Submit weight updates to Subtensor network
+  rpc SubmitWeights(WeightSubmissionRequest) returns (WeightSubmissionResponse);
+  
+  // Get current network consensus on miner scores
+  rpc GetConsensus(ConsensusRequest) returns (ConsensusResponse);
+  
+  // Report suspicious activity or disputes
+  rpc ReportIncident(IncidentReport) returns (Ack);
+  
+  // Stream real-time validation events
+  rpc StreamValidationEvents(ValidationStreamRequest) returns (stream ValidationEvent);
+  
+  // Health check and status
+  rpc GetValidatorStatus(google.protobuf.Empty) returns (ValidatorStatus);
+}
+
+// ============================================================================
+// Message Definitions
+// ============================================================================
+
+// Score Submission - Validator's assessment of miner quality
+message ScoreSubmissionRequest {
+  string validator_hotkey = 1;
+  
+  // Miner being scored
+  string miner_hotkey = 2;
+  
+  // Evaluation period
+  google.protobuf.Timestamp evaluation_start = 3;
+  google.protobuf.Timestamp evaluation_end = 4;
+  
+  // Quality score components
+  QualityScore quality_score = 5;
+  
+  // Supporting evidence
+  repeated Evidence evidence = 6;
+  
+  // Validation metadata
+  ValidationMetadata validation_metadata = 7;
+  
+  // Signature and timestamp
+  google.protobuf.Timestamp timestamp = 8;
+  string signature = 9;
+  string nonce = 10;
+}
+
+// Quality Score Breakdown
+message QualityScore {
+  // Overall normalized score (0.0 - 1.0)
+  double overall_score = 1;
+  
+  // Component scores
+  double uptime_score = 2;              // α component
+  double tps_score = 3;                 // β component  
+  double player_engagement_score = 4;   // γ component
+  double adventure_quality_score = 5;   // δ component
+  double validator_probe_score = 6;     // ε component
+  double anti_bot_score = 7;            // ζ component
+  
+  // Score weights used (for transparency)
+  ScoreWeights weights_used = 8;
+  
+  // Confidence and reliability metrics
+  double confidence_score = 9;          // Confidence in this assessment
+  double data_quality_score = 10;       // Quality of underlying data
+}
+
+// Score Weights Configuration
+message ScoreWeights {
+  double uptime_weight = 1;             // α (default 0.20)
+  double tps_weight = 2;                // β (default 0.15)
+  double player_engagement_weight = 3;  // γ (default 0.25)
+  double adventure_quality_weight = 4;  // δ (default 0.20)
+  double validator_probe_weight = 5;    // ε (default 0.15)
+  double anti_bot_weight = 6;           // ζ (default 0.05)
+}
+
+// Evidence Supporting Score Assessment
+message Evidence {
+  string evidence_type = 1;             // probe_result, player_metrics, performance_data
+  google.protobuf.Timestamp collected_at = 2;
+  string evidence_data = 3;             // JSON-encoded evidence
+  string evidence_hash = 4;             // Hash for integrity verification
+  double weight = 5;                    // Weight of this evidence in scoring
+  repeated string tags = 6;             // Tags for evidence categorization
+}
+
+// Validation Metadata
+message ValidationMetadata {
+  string validation_method = 1;         // automated, manual, hybrid
+  repeated string tools_used = 2;       // List of validation tools/methods
+  double coverage_percentage = 3;       // Percentage of miner activity validated
+  int32 probe_count = 4;               // Number of probes performed
+  int32 sample_size = 5;               // Number of data points evaluated
+  repeated string anomalies_detected = 6; // Any anomalies found
+}
+
+// Probe Server Request - Initiate server evaluation
+message ProbeServerRequest {
+  string validator_hotkey = 1;
+  string target_miner_hotkey = 2;
+  
+  // Probe configuration
+  repeated string probe_types = 3;      // connection, performance, adventure, replay
+  int32 duration_seconds = 4;           // Probe duration
+  int32 concurrent_connections = 5;     // Number of simultaneous probe clients
+  
+  // Probe parameters
+  map<string, string> probe_params = 6;
+  
+  // Priority and scheduling
+  int32 priority = 7;                   // 1-10, higher = more urgent
+  google.protobuf.Timestamp scheduled_for = 8; // When to execute probe
+  
+  string signature = 9;
+  google.protobuf.Timestamp timestamp = 10;
+}
+
+// Probe Result - Results from server probing
+message ProbeResult {
+  string probe_id = 1;
+  string validator_hotkey = 2;
+  string target_miner_hotkey = 3;
+  
+  // Probe execution details
+  google.protobuf.Timestamp started_at = 4;
+  google.protobuf.Timestamp completed_at = 5;
+  bool success = 6;
+  
+  // Connection and basic metrics
+  ConnectionMetrics connection_metrics = 7;
+  
+  // Performance assessment
+  PerformanceAssessment performance = 8;
+  
+  // Adventure evaluation
+  AdventureEvaluation adventure_eval = 9;
+  
+  // Player simulation results
+  PlayerSimulationResults simulation_results = 10;
+  
+  // Anti-cheat analysis
+  AntiCheatAnalysis anti_cheat = 11;
+  
+  // Overall assessment
+  double quality_assessment = 12;       // 0.0-1.0 quality score from this probe
+  repeated string issues_found = 13;    // Any issues detected
+  string error_message = 14;           // Error details if probe failed
+}
+
+// Connection Metrics from Probe
+message ConnectionMetrics {
+  bool connection_successful = 1;
+  double response_time_ms = 2;
+  double average_ping_ms = 3;
+  double packet_loss_rate = 4;
+  int32 connection_attempts = 5;
+  int32 successful_connections = 6;
+  repeated string connection_errors = 7;
+}
+
+// Performance Assessment
+message PerformanceAssessment {
+  double server_tps = 1;
+  double response_latency_ms = 2;
+  int32 players_observed = 3;
+  double chunk_load_time_ms = 4;
+  bool performance_stable = 5;
+  repeated string performance_issues = 6;
+  double performance_score = 7;         // 0.0-1.0
+}
+
+// Adventure Evaluation Results
+message AdventureEvaluation {
+  bool adventures_available = 1;
+  int32 adventure_count = 2;
+  repeated string adventure_types = 3;
+  double completion_rate_observed = 4;
+  double difficulty_balance_score = 5;
+  bool content_variety_adequate = 6;
+  double adventure_quality_score = 7;   // 0.0-1.0
+  repeated string quality_issues = 8;
+}
+
+// Player Simulation Results
+message PlayerSimulationResults {
+  int32 simulations_run = 3;
+  double avg_session_duration_minutes = 4;
+  int32 objectives_completed = 5;
+  double engagement_score = 6;
+  bool realistic_gameplay = 7;
+  repeated string simulation_issues = 8;
+}
+
+// Anti-Cheat Analysis Results  
+message AntiCheatAnalysis {
+  double bot_detection_score = 1;       // 0.0-1.0, higher = more likely bots
+  int32 suspicious_players_detected = 2;
+  repeated string bot_indicators = 3;
+  repeated string human_indicators = 4;
+  double confidence_score = 5;
+  bool anti_cheat_effective = 6;
+}
+
+// Replay Request for Validation
+message ReplayRequest {
+  string validator_hotkey = 1;
+  string target_miner_hotkey = 2;
+  string adventure_id = 3;
+  string replay_seed = 4;
+  
+  // Validation parameters
+  google.protobuf.Timestamp start_time = 5;
+  google.protobuf.Timestamp end_time = 6;
+  repeated string checkpoints_required = 7;
+  bool full_replay_required = 8;
+  
+  string signature = 9;
+  google.protobuf.Timestamp timestamp = 10;
+}
+
+// Replay Data Response
+message ReplayData {
+  string adventure_id = 1;
+  string replay_seed = 2;
+  bool replay_available = 3;
+  
+  // Replay validation results
+  bool replay_valid = 4;
+  bool deterministic = 5;
+  double validation_score = 6;          // 0.0-1.0
+  
+  // Replay content (if requested)
+  bytes compressed_replay_data = 7;
+  repeated CheckpointValidation checkpoints = 8;
+  
+  // Validation details
+  repeated string validation_errors = 9;
+  string validation_summary = 10;
+  google.protobuf.Timestamp validated_at = 11;
+}
+
+// Checkpoint Validation Results
+message CheckpointValidation {
+  string checkpoint_id = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  bool valid = 3;
+  string expected_hash = 4;
+  string actual_hash = 5;
+  string validation_error = 6;
+  map<string, string> state_diffs = 7;  // Differences found
+}
+
+// Weight Submission Request
+message WeightSubmissionRequest {
+  string validator_hotkey = 1;
+  
+  // Weight assignments
+  repeated MinerWeight miner_weights = 2;
+  
+  // Submission metadata
+  google.protobuf.Timestamp evaluation_period_start = 3;
+  google.protobuf.Timestamp evaluation_period_end = 4;
+  int32 miners_evaluated = 5;
+  double total_validation_coverage = 6;
+  
+  // Consensus information
+  string consensus_round_id = 7;
+  double consensus_confidence = 8;
+  
+  string signature = 9;
+  google.protobuf.Timestamp timestamp = 10;
+}
+
+// Individual Miner Weight Assignment
+message MinerWeight {
+  string miner_hotkey = 1;
+  double weight = 2;                    // Normalized weight (0.0-1.0)
+  double raw_score = 3;                 // Raw quality score before normalization
+  double confidence = 4;                // Confidence in this weight assignment
+  repeated string scoring_factors = 5;  // Factors that influenced scoring
+  string validation_summary = 6;        // Brief summary of validation performed
+}
+
+// Weight Submission Response
+message WeightSubmissionResponse {
+  bool accepted = 1;
+  string submission_id = 2;
+  google.protobuf.Timestamp processed_at = 3;
+  string status_message = 4;
+  repeated string warnings = 5;
+  repeated string errors = 6;
+}
+
+// Consensus Request
+message ConsensusRequest {
+  string validator_hotkey = 1;
+  repeated string miner_hotkeys = 2;    // Specific miners to get consensus for
+  google.protobuf.Timestamp as_of_time = 3;
+  string signature = 4;
+}
+
+// Consensus Response
+message ConsensusResponse {
+  string consensus_round_id = 1;
+  google.protobuf.Timestamp consensus_time = 2;
+  
+  repeated MinerConsensus miner_consensus = 3;
+  
+  // Network-wide consensus metrics
+  double network_consensus_strength = 4;
+  int32 participating_validators = 5;
+  double agreement_threshold = 6;
+  
+  repeated string consensus_issues = 7;
+}
+
+// Consensus Information for Individual Miner
+message MinerConsensus {
+  string miner_hotkey = 1;
+  double consensus_score = 2;           // Consensus quality score
+  double score_variance = 3;            // Variance in validator scores
+  int32 validator_count = 4;            // Number of validators scoring this miner
+  double agreement_percentage = 5;      // Percentage agreement among validators
+  bool disputed = 6;                    // Whether score is under dispute
+  repeated string dispute_reasons = 7;
+}
+
+// Incident Report for Suspicious Activity
+message IncidentReport {
+  string validator_hotkey = 1;
+  string incident_id = 2;
+  string incident_type = 3;             // bot_farm, collusion, cheating, performance
+  
+  // Affected entities
+  repeated string involved_miners = 4;
+  repeated string involved_validators = 5;
+  
+  // Incident details
+  string description = 6;
+  string severity = 7;                  // low, medium, high, critical
+  repeated Evidence supporting_evidence = 8;
+  
+  // Suggested actions
+  repeated string recommended_actions = 9;
+  
+  google.protobuf.Timestamp incident_time = 10;
+  google.protobuf.Timestamp reported_at = 11;
+  string signature = 12;
+}
+
+// Validation Stream Request
+message ValidationStreamRequest {
+  string validator_hotkey = 1;
+  repeated string event_types = 2;      // score_updates, probe_results, consensus_changes
+  google.protobuf.Timestamp start_from = 3;
+}
+
+// Validation Event (Streamed)
+message ValidationEvent {
+  string event_id = 1;
+  string event_type = 2;
+  google.protobuf.Timestamp timestamp = 3;
+  string validator_hotkey = 4;
+  
+  // Event data (one of the following will be populated)
+  ScoreSubmissionRequest score_update = 5;
+  ProbeResult probe_result = 6;
+  ConsensusResponse consensus_change = 7;
+  IncidentReport incident_report = 8;
+  
+  map<string, string> metadata = 9;
+}
+
+// Validator Status Response
+message ValidatorStatus {
+  string validator_hotkey = 1;
+  bool operational = 2;
+  string status = 3;                    // ACTIVE, IDLE, MAINTENANCE, ERROR
+  
+  // Performance metrics
+  ValidatorPerformance performance = 4;
+  
+  // Current activity
+  int32 active_probes = 5;
+  int32 miners_being_validated = 6;
+  google.protobuf.Timestamp last_weight_submission = 7;
+  
+  // Health indicators
+  repeated string health_issues = 8;
+  double uptime_percentage = 9;
+  
+  // Network participation
+  double consensus_participation_rate = 10;
+  double scoring_accuracy = 11;
+  
+  google.protobuf.Timestamp status_timestamp = 12;
+}
+
+// Validator Performance Metrics
+message ValidatorPerformance {
+  // Validation coverage
+  int32 miners_validated_24h = 1;
+  double validation_coverage_percentage = 2;
+  
+  // Probe statistics
+  int32 probes_completed_24h = 3;
+  double avg_probe_duration_seconds = 4;
+  double probe_success_rate = 5;
+  
+  // Scoring metrics
+  double avg_score_processing_time_ms = 6;
+  double consensus_agreement_rate = 7;
+  int32 disputes_raised_24h = 8;
+  
+  // Resource utilization
+  double cpu_usage_avg = 9;
+  double memory_usage_avg_mb = 10;
+  double network_bandwidth_mbps = 11;
+}
+
+// Generic Acknowledgment Response
+message Ack {
+  bool ok = 1;
+  string message = 2;
+  int32 error_code = 3;                 // Error code if ok = false
+  google.protobuf.Timestamp timestamp = 4;
+  map<string, string> metadata = 5;     // Additional response metadata
+}

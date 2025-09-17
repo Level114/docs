@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="draw.io" modified="2024-03-20T12:00:00.000Z" agent="Bittensor Minecraft Subnet Docs" etag="architecture_diagram_v1.0" version="21.6.8" type="device">
+  <diagram name="System Architecture" id="architecture">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Bittensor Minecraft Subnet Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="284" y="20" width="600" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Players Layer -->
+        <mxCell id="players_layer" value="Players (Gaming Community)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="100" width="1000" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Miners Layer -->
+        <mxCell id="miners_title" value="Miners (Minecraft Servers)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="180" width="200" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="miner1" value="Miner 1&#xa;Paper Server&#xa;+ Subnet Plugin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="120" y="220" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="miner2" value="Miner 2&#xa;Spigot Server&#xa;+ Subnet Plugin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="280" y="220" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="miner3" value="Miner 3&#xa;Paper Server&#xa;+ Subnet Plugin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="440" y="220" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="miner_etc" value="... More Miners" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="600" y="220" width="120" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Validators Layer -->
+        <mxCell id="validators_title" value="Validators (Quality Assessors)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="180" width="200" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="validator1" value="Validator 1&#xa;Probe Clients&#xa;+ Scoring Engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="780" y="220" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="validator2" value="Validator 2&#xa;Probe Clients&#xa;+ Scoring Engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="940" y="220" width="120" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Protocol Layer -->
+        <mxCell id="protocol_layer" value="Subnet Protocol Layer (gRPC + REST APIs)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="350" width="1000" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Adventure System -->
+        <mxCell id="adventure_system" value="Adventure Management System" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="120" y="430" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Telemetry System -->
+        <mxCell id="telemetry_system" value="Telemetry & Metrics Collection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="360" y="430" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Quality Assessment -->
+        <mxCell id="quality_system" value="Quality Assessment & Scoring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="600" y="430" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Anti-Cheat -->
+        <mxCell id="anticheat_system" value="Anti-Cheat & Replay Validation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="840" y="430" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Subtensor Layer -->
+        <mxCell id="subtensor_layer" value="Subtensor Network (Consensus & Reward Distribution)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="540" width="1000" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Developer Fund -->
+        <mxCell id="developer_fund" value="Developer Fund&#xa;(18% Allocation)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="480" y="640" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Connections -->
+        <!-- Players to Miners -->
+        <mxCell id="connection1" value="" style="endArrow=classic;startArrow=classic;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="players_layer" target="miner1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="180" y="180" as="sourcePoint" />
+            <mxPoint x="180" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="connection2" value="" style="endArrow=classic;startArrow=classic;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="players_layer" target="miner2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="180" as="sourcePoint" />
+            <mxPoint x="340" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Validators to Miners -->
+        <mxCell id="validation1" value="Probes &amp; Quality Assessment" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#d6b656;" edge="1" parent="1" source="validator1" target="miner1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="700" y="260" as="sourcePoint" />
+            <mxPoint x="400" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Protocol Layer Connections -->
+        <mxCell id="protocol_conn1" value="" style="endArrow=classic;startArrow=classic;html=1;strokeWidth=2;strokeColor=#b85450;" edge="1" parent="1" source="miner1" target="protocol_layer">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="180" y="310" as="sourcePoint" />
+            <mxPoint x="180" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Subtensor Connection -->
+        <mxCell id="subtensor_conn" value="Weight Updates &amp; Consensus" style="endArrow=classic;startArrow=classic;html=1;strokeWidth=3;strokeColor=#d79b00;" edge="1" parent="1" source="protocol_layer" target="subtensor_layer">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580" y="410" as="sourcePoint" />
+            <mxPoint x="580" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Reward Distribution -->
+        <mxCell id="reward_miners" value="41% to Miners" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="subtensor_layer" target="miner2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="540" as="sourcePoint" />
+            <mxPoint x="340" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="reward_validators" value="41% to Validators" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#d6b656;" edge="1" parent="1" source="subtensor_layer" target="validator1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="540" as="sourcePoint" />
+            <mxPoint x="840" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="reward_developers" value="18% to Developers" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="subtensor_layer" target="developer_fund">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580" y="610" as="sourcePoint" />
+            <mxPoint x="580" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend_title" value="Legend" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="720" width="60" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend_miners" value="Miners (Game Servers)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="80" y="750" width="150" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend_validators" value="Validators (Quality Assessors)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="250" y="750" width="180" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend_protocol" value="Protocol Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="450" y="750" width="120" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend_subtensor" value="Subtensor Network" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="590" y="750" width="140" height="30" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

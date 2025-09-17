@@ -1,0 +1,163 @@
+@startuml protocol-sequence
+!theme plain
+title Bittensor Minecraft Subnet Protocol Sequence
+
+actor Player as P
+participant "Minecraft\nServer (Miner)" as M
+participant "Subnet\nPlugin" as SP
+participant "Miner\nAgent" as MA
+participant "Validator\nAgent" as VA
+participant "Probe\nClient" as PC
+participant "Subtensor\nNetwork" as SN
+
+== Registration Phase ==
+
+MA -> SN: Register miner with hotkey
+note right: One-time registration with\nBittensor network
+
+VA -> SN: Register validator with hotkey
+note right: Validator registration\nand staking
+
+== Adventure Distribution ==
+
+VA -> MA: Publish adventure definition
+note right: Adventure task with objectives,\ndifficulty, time limits
+
+MA -> SP: Configure adventure on server
+SP -> M: Load adventure world and objectives
+M -> M: Generate world with specified seed
+
+== Player Gameplay ==
+
+P -> M: Connect to server (port 25565)
+M -> P: Send adventure details
+P -> M: Begin adventure gameplay
+
+loop Continuous Gameplay
+    P -> M: Player actions (move, break, craft, fight)
+    M -> SP: Game events captured
+    SP -> SP: Log events with timestamps
+    SP -> SP: Track objective progress
+    
+    alt Objective Completed
+        SP -> SP: Generate completion proof
+        SP -> MA: Report objective completion
+    end
+    
+    SP -> MA: Real-time metrics update
+    note right: TPS, player count,\nengagement metrics
+end
+
+P -> M: Complete adventure or disconnect
+SP -> MA: Final session metrics
+
+== Telemetry & Proof Submission ==
+
+loop Every 30 seconds
+    MA -> VA: Submit heartbeat
+    note right: Server status, TPS,\nplayer metrics, uptime
+end
+
+loop Every 5 minutes
+    SP -> MA: Compile proof bundle
+    note right: Event logs, objective completions,\nreplay data, performance metrics
+    MA -> VA: Submit proof bundle
+    note right: Cryptographically signed\nevidence package
+end
+
+== Validation Process ==
+
+loop Validation Cycle (Every 5 minutes)
+    VA -> PC: Initialize probe clients
+    PC -> M: Connect as fake players
+    PC -> M: Test server responsiveness
+    PC -> M: Simulate gameplay scenarios
+    
+    alt Adventure Validation
+        PC -> M: Attempt adventure completion
+        PC -> PC: Measure completion rates
+        PC -> PC: Assess content quality
+    end
+    
+    PC -> VA: Report probe results
+    note right: Connection quality, TPS,\nadventure assessment, anti-bot analysis
+    
+    VA -> MA: Request replay data
+    MA -> VA: Provide replay with seed
+    VA -> VA: Verify replay determinism
+    
+    VA -> VA: Calculate quality score
+    note right: Multi-factor scoring:\nUptime, TPS, Engagement,\nAdventure Quality, Probe Response, Anti-Bot
+end
+
+== Consensus & Weight Submission ==
+
+loop Every 15 seconds (Block time)
+    VA -> VA: Aggregate miner scores
+    VA -> VA: Apply score normalization
+    VA -> VA: Calculate weight distribution
+    
+    alt Consensus Check
+        VA -> VA: Compare with other validators
+        
+        alt Score Disputes
+            VA -> SN: Submit dispute evidence
+            SN -> SN: Dispute resolution process
+        end
+    end
+    
+    VA -> SN: Submit weight updates
+    note right: Signed weight assignments\nfor all evaluated miners
+    
+    SN -> SN: Network consensus on weights
+    SN -> SN: Calculate reward distribution
+end
+
+== Reward Distribution ==
+
+SN -> SN: Emit fixed block rewards
+SN -> MA: Distribute 41% to miners (weighted)
+SN -> VA: Distribute 41% to validators (work-based)
+SN -> SN: Allocate 18% to developer fund
+
+note over SN: Reward allocation based on\nquality scores and consensus
+
+== Continuous Monitoring ==
+
+loop Real-time
+    MA -> VA: Stream performance metrics
+    VA -> VA: Monitor for anomalies
+    
+    alt Performance Issues Detected
+        VA -> MA: Alert about issues
+        MA -> SP: Trigger optimizations
+    end
+    
+    alt Suspicious Activity
+        VA -> SN: Report incident
+        SN -> SN: Investigate and potentially slash
+    end
+end
+
+== Emergency Procedures ==
+
+alt Network Issues
+    MA -> MA: Enter degraded mode
+    VA -> VA: Reduce validation frequency
+    SN -> SN: Adjust consensus thresholds
+end
+
+alt Miner Misconduct Detected
+    VA -> SN: Submit evidence of cheating
+    SN -> SN: Evaluate evidence
+    
+    alt Evidence Confirmed
+        SN -> MA: Apply slashing penalty
+        SN -> SN: Redistribute slashed tokens
+    else Appeal Process
+        MA -> SN: Submit appeal with counter-evidence
+        SN -> SN: Community review process
+    end
+end
+
+@enduml

@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AdventureTask",
+  "description": "Standardized adventure definition for Minecraft subnet miners",
+  "type": "object",
+  "required": ["id", "version", "world_seed_hash", "objectives", "time_limit_sec", "content_hash"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "description": "Unique identifier for the adventure (UUID v4 format)"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Adventure format version (semantic versioning)"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Human-readable adventure name"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Adventure description for players"
+    },
+    "world_seed_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$",
+      "description": "SHA-256 hash of the world generation seed"
+    },
+    "objectives": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "params", "reward_points"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique objective identifier within the adventure"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["collect", "defeat", "reach", "craft", "survive", "build", "explore"],
+            "description": "Type of objective to be completed"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "description": "Human-readable objective name"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 300,
+            "description": "Detailed objective description"
+          },
+          "params": {
+            "type": "object",
+            "description": "Objective-specific parameters",
+            "additionalProperties": true
+          },
+          "reward_points": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000,
+            "description": "Points awarded for completing this objective"
+          },
+          "required": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether this objective is required for adventure completion"
+          },
+          "time_limit_sec": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Optional time limit for this specific objective"
+          }
+        }
+      },
+      "description": "List of objectives to complete in the adventure"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["easy", "normal", "hard", "extreme"],
+      "description": "Overall difficulty level of the adventure"
+    },
+    "time_limit_sec": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 7200,
+      "description": "Maximum time allowed to complete the adventure (in seconds)"
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$",
+      "description": "SHA-256 hash of all adventure content for integrity verification"
+    },
+    "prerequisites": {
+      "type": "object",
+      "properties": {
+        "min_level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "Minimum player level required"
+        },
+        "items_required": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of required items for adventure start"
+        },
+        "completed_adventures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of adventure IDs that must be completed first"
+        }
+      },
+      "description": "Prerequisites for starting this adventure"
+    },
+    "rewards": {
+      "type": "object",
+      "properties": {
+        "experience": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Experience points awarded upon completion"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["item_id", "quantity"],
+            "properties": {
+              "item_id": {
+                "type": "string",
+                "description": "Minecraft item identifier"
+              },
+              "quantity": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Number of items to award"
+              },
+              "enchantments": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "description": "Item enchantments (enchantment_id: level)"
+              }
+            }
+          },
+          "description": "Items awarded upon completion"
+        },
+        "currency": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "In-game currency awarded"
+        }
+      },
+      "description": "Rewards given upon successful adventure completion"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "creator": {
+          "type": "string",
+          "description": "Adventure creator identifier"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Adventure creation timestamp"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tags for adventure categorization"
+        },
+        "estimated_duration_minutes": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Estimated time to complete (in minutes)"
+        },
+        "max_players": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50,
+          "description": "Maximum number of players for this adventure"
+        }
+      },
+      "description": "Additional metadata about the adventure"
+    },
+    "validation": {
+      "type": "object",
+      "properties": {
+        "replay_seed": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{32}$",
+          "description": "Seed for deterministic replay validation"
+        },
+        "checkpoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["checkpoint_id", "validation_hash"],
+            "properties": {
+              "checkpoint_id": {
+                "type": "string",
+                "description": "Unique checkpoint identifier"
+              },
+              "validation_hash": {
+                "type": "string",
+                "pattern": "^[a-fA-F0-9]{64}$",
+                "description": "Hash for validating checkpoint state"
+              },
+              "timestamp": {
+                "type": "integer",
+                "description": "Expected timestamp for reaching this checkpoint"
+              }
+            }
+          },
+          "description": "Validation checkpoints for replay verification"
+        },
+        "anti_cheat_measures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of anti-cheat measures implemented"
+        }
+      },
+      "description": "Validation and anti-cheat configuration"
+    }
+  },
+  "additionalProperties": false
+}

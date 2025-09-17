@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MinerHeartbeat",
+  "description": "Regular status update from Minecraft server miners",
+  "type": "object",
+  "required": ["miner_hotkey", "server_version", "plugin_version", "tps_avg", "players_online", "uptime_sec", "timestamp"],
+  "properties": {
+    "miner_hotkey": {
+      "type": "string",
+      "pattern": "^5[A-HJ-NP-Z1-9]{47}$",
+      "description": "Bittensor hotkey identifier for the miner"
+    },
+    "server_version": {
+      "type": "string",
+      "pattern": "^(Paper|Spigot|Bukkit)-\\d+\\.\\d+\\.\\d+(-\\w+)?$",
+      "description": "Minecraft server software and version"
+    },
+    "plugin_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Subnet plugin version (semantic versioning)"
+    },
+    "timestamp": {
+      "type": "integer",
+      "minimum": 1600000000,
+      "description": "Unix timestamp when heartbeat was generated"
+    },
+    "server_info": {
+      "type": "object",
+      "required": ["name", "motd", "max_players"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Server name identifier"
+        },
+        "motd": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Message of the day displayed to players"
+        },
+        "max_players": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "Maximum number of concurrent players"
+        },
+        "game_mode": {
+          "type": "string",
+          "enum": ["survival", "creative", "adventure", "spectator"],
+          "description": "Default game mode"
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["peaceful", "easy", "normal", "hard"],
+          "description": "Server difficulty setting"
+        }
+      },
+      "description": "Basic server configuration information"
+    },
+    "performance_metrics": {
+      "type": "object",
+      "required": ["tps_avg", "tps_min", "tps_max"],
+      "properties": {
+        "tps_avg": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 25,
+          "description": "Average ticks per second over last 5 minutes"
+        },
+        "tps_min": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 25,
+          "description": "Minimum TPS in the measurement window"
+        },
+        "tps_max": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 25,
+          "description": "Maximum TPS in the measurement window"
+        },
+        "latency_ms": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5000,
+          "description": "Average server latency in milliseconds"
+        },
+        "memory_used_mb": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "JVM memory usage in megabytes"
+        },
+        "memory_max_mb": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "JVM maximum memory allocation in megabytes"
+        },
+        "cpu_usage_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "CPU usage percentage"
+        },
+        "gc_collections": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Garbage collection count since last heartbeat"
+        },
+        "gc_time_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total GC time in milliseconds since last heartbeat"
+        }
+      },
+      "description": "Server performance and resource utilization metrics"
+    },
+    "player_metrics": {
+      "type": "object",
+      "required": ["players_online", "players_max_concurrent"],
+      "properties": {
+        "players_online": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Current number of online players"
+        },
+        "players_max_concurrent": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum concurrent players since last heartbeat"
+        },
+        "unique_players_24h": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Unique players in the last 24 hours"
+        },
+        "avg_session_duration_minutes": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Average player session duration"
+        },
+        "new_player_joins": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "New players since last heartbeat"
+        },
+        "player_disconnects": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Player disconnections since last heartbeat"
+        }
+      },
+      "description": "Player activity and engagement metrics"
+    },
+    "uptime_metrics": {
+      "type": "object",
+      "required": ["uptime_sec", "last_restart"],
+      "properties": {
+        "uptime_sec": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Server uptime in seconds since last restart"
+        },
+        "last_restart": {
+          "type": "integer",
+          "description": "Unix timestamp of last server restart"
+        },
+        "restart_reason": {
+          "type": "string",
+          "enum": ["scheduled", "crash", "update", "manual", "unknown"],
+          "description": "Reason for last restart if within 24h"
+        },
+        "crashes_24h": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of crashes in the last 24 hours"
+        }
+      },
+      "description": "Server uptime and stability metrics"
+    },
+    "adventure_metrics": {
+      "type": "object",
+      "properties": {
+        "active_adventures": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of currently active adventures"
+        },
+        "completed_adventures_1h": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Adventures completed in the last hour"
+        },
+        "failed_adventures_1h": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Adventures failed in the last hour"
+        },
+        "average_completion_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Overall adventure completion rate (0-1)"
+        },
+        "adventure_types_active": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of currently active adventure types"
+        }
+      },
+      "description": "Adventure-specific metrics and statistics"
+    },
+    "network_metrics": {
+      "type": "object",
+      "properties": {
+        "external_ip": {
+          "type": "string",
+          "format": "ipv4",
+          "description": "Public IP address of the server"
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Server port number"
+        },
+        "bandwidth_in_mbps": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Inbound bandwidth usage in Mbps"
+        },
+        "bandwidth_out_mbps": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Outbound bandwidth usage in Mbps"
+        },
+        "connection_attempts_1h": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Connection attempts in the last hour"
+        },
+        "failed_connections_1h": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Failed connection attempts in the last hour"
+        }
+      },
+      "description": "Network connectivity and bandwidth metrics"
+    },
+    "plugin_status": {
+      "type": "object",
+      "required": ["enabled", "last_update"],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the subnet plugin is currently enabled"
+        },
+        "last_update": {
+          "type": "integer",
+          "description": "Unix timestamp of last plugin update/restart"
+        },
+        "error_count_1h": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Plugin errors in the last hour"
+        },
+        "warnings_count_1h": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Plugin warnings in the last hour"
+        },
+        "features_enabled": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of enabled plugin features"
+        }
+      },
+      "description": "Subnet plugin status and health information"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{128}$",
+      "description": "Cryptographic signature of the heartbeat data"
+    },
+    "nonce": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{16}$",
+      "description": "Nonce for replay protection"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,396 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlayerMetrics",
+  "description": "Individual player session and engagement metrics for quality scoring",
+  "type": "object",
+  "required": ["session_id", "player_uuid", "joined_at", "left_at", "miner_hotkey"],
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "description": "Unique identifier for this gameplay session"
+    },
+    "player_uuid": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "description": "Minecraft player UUID (anonymized for privacy)"
+    },
+    "miner_hotkey": {
+      "type": "string",
+      "pattern": "^5[A-HJ-NP-Z1-9]{47}$",
+      "description": "Bittensor hotkey of the miner serving this player"
+    },
+    "session_timing": {
+      "type": "object",
+      "required": ["joined_at", "left_at"],
+      "properties": {
+        "joined_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when player joined"
+        },
+        "left_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when player left (null if still online)"
+        },
+        "session_duration_minutes": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total session duration in minutes"
+        },
+        "active_play_minutes": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Active gameplay time excluding AFK periods"
+        },
+        "afk_duration_minutes": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Time spent AFK during session"
+        }
+      },
+      "description": "Session timing and duration metrics"
+    },
+    "engagement_metrics": {
+      "type": "object",
+      "properties": {
+        "engagement_minutes": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Weighted engagement time based on activity level"
+        },
+        "activity_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Overall activity score (0-1) based on actions per minute"
+        },
+        "interaction_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of game interactions"
+        },
+        "movement_distance": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total distance moved in blocks"
+        },
+        "chat_messages_sent": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of chat messages sent"
+        },
+        "commands_used": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of commands executed"
+        }
+      },
+      "description": "Player engagement and activity metrics"
+    },
+    "adventure_progress": {
+      "type": "object",
+      "properties": {
+        "adventures_started": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of adventures started during session"
+        },
+        "adventures_completed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of adventures completed during session"
+        },
+        "objectives_completed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total objectives completed across all adventures"
+        },
+        "completion_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Adventure completion rate for this session"
+        },
+        "average_completion_time_minutes": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Average time to complete adventures"
+        },
+        "difficulty_distribution": {
+          "type": "object",
+          "properties": {
+            "easy": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "normal": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "hard": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "extreme": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "description": "Count of adventures attempted by difficulty level"
+        }
+      },
+      "description": "Adventure participation and completion metrics"
+    },
+    "gameplay_actions": {
+      "type": "object",
+      "properties": {
+        "blocks_broken": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of blocks broken"
+        },
+        "blocks_placed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of blocks placed"
+        },
+        "items_crafted": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of items crafted"
+        },
+        "items_used": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of items used/consumed"
+        },
+        "mobs_killed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of hostile mobs killed"
+        },
+        "deaths": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of player deaths"
+        },
+        "jumps": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of jumps performed"
+        },
+        "damage_dealt": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total damage dealt to entities"
+        },
+        "damage_taken": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total damage taken"
+        }
+      },
+      "description": "Detailed gameplay action statistics"
+    },
+    "server_interaction": {
+      "type": "object",
+      "properties": {
+        "login_attempts": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of login attempts (including successful)"
+        },
+        "connection_quality": {
+          "type": "object",
+          "properties": {
+            "average_ping_ms": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Average ping during session"
+            },
+            "packet_loss_rate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Packet loss rate (0-1)"
+            },
+            "disconnection_count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of disconnections during session"
+            },
+            "reconnection_count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of reconnections during session"
+            }
+          },
+          "description": "Connection quality metrics"
+        },
+        "server_performance_experienced": {
+          "type": "object",
+          "properties": {
+            "average_server_tps": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 25,
+              "description": "Average server TPS experienced by player"
+            },
+            "lag_spikes_count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of significant lag spikes experienced"
+            },
+            "chunk_load_time_avg_ms": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Average chunk loading time"
+            }
+          },
+          "description": "Server performance as experienced by the player"
+        }
+      },
+      "description": "Player's interaction with server infrastructure"
+    },
+    "behavioral_analysis": {
+      "type": "object",
+      "properties": {
+        "bot_likelihood": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Calculated probability that this is a bot (0-1)"
+        },
+        "behavior_flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "repetitive_movement",
+              "inhuman_reaction_times",
+              "perfect_accuracy",
+              "no_idle_time",
+              "scripted_chat",
+              "unusual_timing_patterns",
+              "impossible_coordinates",
+              "suspicious_item_usage"
+            ]
+          },
+          "description": "Flags indicating potentially non-human behavior"
+        },
+        "human_indicators": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "natural_movement_variance",
+              "realistic_reaction_times",
+              "creative_problem_solving",
+              "social_interaction",
+              "learning_curve",
+              "mistakes_and_corrections",
+              "exploration_behavior",
+              "varied_play_patterns"
+            ]
+          },
+          "description": "Indicators supporting human player classification"
+        },
+        "confidence_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence in the bot/human classification"
+        }
+      },
+      "description": "Anti-bot behavioral analysis results"
+    },
+    "privacy_settings": {
+      "type": "object",
+      "properties": {
+        "data_anonymized": {
+          "type": "boolean",
+          "description": "Whether player data has been anonymized"
+        },
+        "location_tracking_enabled": {
+          "type": "boolean",
+          "description": "Whether location tracking is enabled"
+        },
+        "chat_logging_enabled": {
+          "type": "boolean",
+          "description": "Whether chat messages are logged"
+        },
+        "retention_period_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 365,
+          "description": "Data retention period in days"
+        }
+      },
+      "description": "Privacy and data handling settings"
+    },
+    "validation": {
+      "type": "object",
+      "properties": {
+        "checksum": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$",
+          "description": "SHA-256 checksum of core metrics for integrity"
+        },
+        "validator_verified": {
+          "type": "boolean",
+          "description": "Whether this session was verified by a validator probe"
+        },
+        "anomaly_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Anomaly detection score (higher = more anomalous)"
+        },
+        "data_quality_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Quality score of the collected data (completeness, consistency)"
+        }
+      },
+      "description": "Data validation and quality assurance metrics"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "client_version": {
+          "type": "string",
+          "description": "Minecraft client version used by player"
+        },
+        "client_brand": {
+          "type": "string",
+          "description": "Minecraft client brand (vanilla, forge, fabric, etc.)"
+        },
+        "locale": {
+          "type": "string",
+          "pattern": "^[a-z]{2}_[A-Z]{2}$",
+          "description": "Player's locale setting"
+        },
+        "render_distance": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 32,
+          "description": "Player's render distance setting"
+        },
+        "first_time_player": {
+          "type": "boolean",
+          "description": "Whether this is the player's first session on this server"
+        },
+        "previous_sessions_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of previous sessions by this player"
+        }
+      },
+      "description": "Additional metadata about the player and session context"
+    }
+  },
+  "additionalProperties": false
+}
