@@ -1,0 +1,14 @@
+{
+    "name": "level114-docs",
+    "version": "1.0.0",
+    "description": "Documentation for Level 114 - First Gaming Subnet on Bittensor",
+    "scripts": {
+      "vercel-build": "pip install -r requirements.txt && mkdocs build",
+      "build": "mkdocs build",
+      "dev": "mkdocs serve",
+      "start": "mkdocs serve"
+    },
+    "keywords": ["level114", "bittensor", "gaming", "subnet", "documentation"],
+    "author": "Level114 Team",
+    "license": "MIT"
+  }
