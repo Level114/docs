@@ -1,13 +1,9 @@
 {
-  "builds": [
-    {
-      "src": "requirements.txt",
-      "use": "@vercel/python"
-    }
-  ],
-  "functions": {
-    "api/build.py": {
-      "includeFiles": "**"
-    }
-  }
+  "build": {
+    "commands": [
+      "pip3 install -r requirements.txt",
+      "python3 -m mkdocs build --site-dir dist"
+    ]
+  },
+  "outputDirectory": "dist"
 }
