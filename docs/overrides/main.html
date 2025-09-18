@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  <!-- Favicon and Web App Manifest -->
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ 'img/apple-touch-icon.png' | url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'img/favicon-32x32.png' | url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ 'img/favicon-16x16.png' | url }}">
+  <link rel="manifest" href="{{ 'img/site.webmanifest' | url }}">
+  
+  <!-- Additional mobile and browser compatibility -->
+  <meta name="apple-mobile-web-app-title" content="Level114 Docs">
+  <meta name="application-name" content="Level114 Docs">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="theme-color" content="#000000">
+  
+  <!-- OpenGraph and Social Media Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Docs.Level114 - First Gaming Subnet on Bittensor">
+  <meta property="og:description" content="Documentation for Level 114 - the first gaming subnet on Bittensor, pioneering decentralized gaming infrastructure validation starting with Minecraft servers">
+  <meta property="og:image" content="{{ 'img/android-chrome-512x512.png' | url }}">
+  <meta property="og:url" content="{{ config.site_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Docs.Level114 - First Gaming Subnet on Bittensor">
+  <meta name="twitter:description" content="Documentation for Level 114 - the first gaming subnet on Bittensor">
+  <meta name="twitter:image" content="{{ 'img/android-chrome-512x512.png' | url }}">
+{% endblock %}
