@@ -2,11 +2,23 @@
 
 ## What is Level114?
 
-Level114 is the **first gaming subnet on Bittensor**, pioneering decentralized gaming infrastructure validation. Starting with Minecraft servers, Level114 validates server performance and quality while providing monetization tools for server operators, paving the way for the future of decentralized gaming networks.
+Level114 is the **first gaming subnet on Bittensor**, we aims to bring decentralized gaming to life. We support gaming experiences—not only by validating game servers, but also by rewarding hosts, developers, and players for quality, performance, and community engagement. With Level114, everyone wins when the game plays well, is fair, and grows together.
 
-### The Core Architecture
+### Key pillars of what Level114 delivers:
 
-**Gaming Infrastructure Validation**: Minecraft server operators register with Level114, install monitoring plugins, and earn TAO rewards based on server performance and player engagement. The system validates server quality through decentralized assessment.
+- Uses Bittensor's subnet framework to connect to a wider, token-incentivized network, so rewards, validation, and growth are tied to real performance.
+
+- Measures things players and hosts care about—uptime, speed, stability, fairness—and uses those metrics to guide rewards and trust.
+
+- Gives game creators, server hosts, and communities tools to profit: not just from access or fees, but from delivering great experiences that people want.
+
+- Open, clear rules and metrics: everyone knows how things are tested, how rewards are given, and how to improve.
+
+- Built to scale across different game types and platforms, so soon we'll support more than just one game—expanding into new genres, styles, and ways to play.
+
+## First Game: Minecraft
+
+We're launching with **Minecraft**. In this phase, Minecraft games and servers are validated for quality and performance. Hosts get access to reward tools tied to things like uptime, stability, and player satisfaction, premium players hosted. This first game establishes the standard for what players and hosts can expect—and sets the stage for Level114 to bring the same energy and structure to many more games.
 
 ---
 
